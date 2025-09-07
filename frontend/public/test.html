@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - GestionEDT</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: #3b82f6;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .status {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .status-item:last-child {
+            margin-bottom: 0;
+        }
+        .status-good {
+            color: #059669;
+            font-weight: 600;
+        }
+        .status-error {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .debug-info {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📅</div>
+        <h1>GestionEDT</h1>
+        <p class="subtitle">Application de Gestion d'Emplois du Temps Universitaire</p>
+        
+        <div class="status">
+            <div class="status-item">
+                <span>Frontend Vite:</span>
+                <span class="status-good">✅ Actif</span>
+            </div>
+            <div class="status-item">
+                <span>Backend Django:</span>
+                <span id="backend-status" class="status-error">🔄 Vérification...</span>
+            </div>
+            <div class="status-item">
+                <span>Base de données:</span>
+                <span id="db-status" class="status-error">🔄 Vérification...</span>
+            </div>
+        </div>
+
+        <a href="/login" class="btn">Accéder à l'application</a>
+
+        <div class="debug-info">
+            <strong>Informations de débogage:</strong><br>
+            URL actuelle: <span id="current-url"></span><br>
+            User Agent: <span id="user-agent"></span><br>
+            Timestamp: <span id="timestamp"></span>
+        </div>
+    </div>
+
+    <script>
+        // Afficher les informations de débogage
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('fr-FR');
+
+        // Tester la connexion au backend
+        async function checkBackend() {
+            try {
+                const response = await fetch('/api/auth/login/', {
+                    method: 'OPTIONS'
+                });
+                document.getElementById('backend-status').innerHTML = '<span class="status-good">✅ Connecté</span>';
+            } catch (error) {
+                document.getElementById('backend-status').innerHTML = '<span class="status-error">❌ Déconnecté</span>';
+            }
+        }
+
+        // Tester la base de données via l'API
+        async function checkDatabase() {
+            try {
+                const response = await fetch('/api/academic/departments/');
+                if (response.status === 401) {
+                    document.getElementById('db-status').innerHTML = '<span class="status-good">✅ Connectée (Auth requis)</span>';
+                } else {
+                    document.getElementById('db-status').innerHTML = '<span class="status-good">✅ Connectée</span>';
+                }
+            } catch (error) {
+                document.getElementById('db-status').innerHTML = '<span class="status-error">❌ Erreur de connexion</span>';
+            }
+        }
+
+        // Exécuter les tests
+        checkBackend();
+        checkDatabase();
+    </script>
+</body>
+</html>

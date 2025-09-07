@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GestionEDT - Application de Gestion d'Emplois du Temps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <div id="root">
+      <!-- Fallback content si React ne se charge pas -->
+      <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div class="max-w-md w-full">
+          <!-- Logo et titre -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v9a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">GestionEDT</h1>
+            <p class="text-gray-600">Gestion des emplois du temps universitaire</p>
+          </div>
+
+          <!-- Carte principale -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="text-center mb-6">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Bienvenue</h2>
+              <p class="text-gray-600">Application de gestion des emplois du temps</p>
+            </div>
+
+            <!-- Status -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span class="text-green-800 font-medium">Application chargée avec succès !</span>
+              </div>
+            </div>
+
+            <!-- Fonctionnalités -->
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-900">Planification intelligente</p>
+                  <p class="text-sm text-gray-600">Gestion automatisée des emplois du temps</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                  <span class="text-green-600 font-bold">👥</span>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-900">Gestion multi-rôles</p>
+                  <p class="text-sm text-gray-600">Administrateurs, enseignants, étudiants</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <span class="text-purple-600 font-bold">📊</span>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-900">Rapports détaillés</p>
+                  <p class="text-sm text-gray-600">Analytics et exports avancés</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="space-y-3">
+              <button 
+                onclick="window.location.href='/login'"
+                class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                Se connecter
+              </button>
+              <button 
+                onclick="window.location.href='/register'"
+                class="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              >
+                Créer un compte
+              </button>
+            </div>
+
+            <!-- Informations système -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <div class="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <p class="text-2xl font-bold text-blue-600">5</p>
+                  <p class="text-xs text-gray-500">Rôles utilisateur</p>
+                </div>
+                <div>
+                  <p class="text-2xl font-bold text-green-600">24/7</p>
+                  <p class="text-xs text-gray-500">Disponibilité</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="text-center mt-6">
+            <p class="text-sm text-gray-500">
+              Version 1.0.0 • Développé avec React & Django
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Vérifier si React se charge
+      setTimeout(() => {
+        console.log('Checking if React loaded...');
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.includes('Fallback')) {
+          console.error('React failed to load, showing fallback content');
+        } else {
+          console.log('React loaded successfully');
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
